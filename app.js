@@ -9,7 +9,7 @@ const port = 3000 || process.env.PORT;
 
 
 app.use(morgan('dev'));
-app.use(bodyparser.urlencoded({ extended: true }));
+app.use(bodyparser.json());
 
 app.use(require("./routes/routes"));
 

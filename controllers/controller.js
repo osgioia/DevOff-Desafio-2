@@ -1,13 +1,12 @@
 module.exports = {
   encode: procesoCodificar,
   decode: procesoDecodificar,
-  send404: send404
+  send404: send404,
 };
 
-
 function procesoCodificar(req, res) {
-  let frase = req.body.frase;
   let vueltas = req.body.vueltas;
+  let frase = req.body.mensaje;
   let matriz = [];
   let matrizFinal = [];
   let mensajeFinal = "";
@@ -43,12 +42,12 @@ function procesoCodificar(req, res) {
     }
   }
 
-  res.send(mensajeFinal);
-};
+  res.json({ mensaje: mensajeFinal });
+}
 
 function procesoDecodificar(req, res) {
-  let frase = req.body.frase;
   let vueltas = req.body.vueltas;
+  let frase = req.body.mensaje;
   let matriz = [];
   let matrizFinal = [];
   let mensajeFinal = "";
@@ -72,8 +71,6 @@ function procesoDecodificar(req, res) {
     matrizFinal.push([]);
   }
 
-
-
   for (let i = 0; i < matriz.length; i++) {
     for (let j = 0; j < matriz.length + 1; j++) {
       matrizFinal[j].push(matriz[i][j]);
@@ -86,14 +83,10 @@ function procesoDecodificar(req, res) {
     }
   }
 
-  res.send(mensajeFinal);
-
-};
-
-
-
+  res.json({ mensaje: mensajeFinal });
+}
 
 function send404(req, res) {
   res.status(404);
-  res.send("404 Not Found");
-};
+  res.json({ mensaje: '404 Not Found' });
+}
